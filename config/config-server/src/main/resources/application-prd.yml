@@ -1,0 +1,37 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/wanghuan578/spring-cloud-config-repos.git
+          #search-paths: /
+          username: 57810140@qq.com
+          password: spirit123
+  profiles:
+    active: git
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8000/eureka/
+
+
+# ===========================================================================================
+logging.level.ROOT: INFO
+logging.level.org.springframework.web: INFO
+logging.level.cn.com.waterelephant: INFO
+logging.path: /Users/admin/logs/backup
+logging.file: /Users/admin/logs/media/${spring.application.name}.log
+
+logging.pattern.console: '%d{yyyy-MM-dd HH:mm:ss} - [${spring.application.name:},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] - %msg%n'
+logging.pattern.file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] - [${spring.application.name:},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] - %-5level %logger{36} - %msg%n'

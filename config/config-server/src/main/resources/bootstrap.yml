@@ -1,0 +1,9 @@
+
+server:
+  port: 20000
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: ${config.active:dev}

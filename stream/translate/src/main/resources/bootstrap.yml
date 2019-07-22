@@ -1,0 +1,14 @@
+
+server:
+  port: 9000
+
+spring:
+  application:
+    name: translate
+  profiles:
+    active: dev
+  cloud:
+    config:
+      name: ${spring.application.name}
+      uri: http://${config.host:127.0.0.1}:${config.port:20000}
+      enabled: true
