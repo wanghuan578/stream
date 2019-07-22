@@ -6,14 +6,13 @@ eureka:
   server:
     enable-self-preservation: false
     eviction-interval-timer-in-ms: 10000
-
-  instance:
-    hostname: localhost
   client:
     register-with-eureka: false
     fetch-registry: false
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://localhost:${server.port}/eureka/
 
 
 

@@ -1,10 +1,10 @@
 
 server:
-  port: 80
+  port: 3333
 
 spring:
   application:
-    name: gateway
+    name: api-gateway
   profiles:
     active: dev
   cloud:
