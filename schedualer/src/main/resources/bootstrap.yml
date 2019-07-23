@@ -1,10 +1,10 @@
 
 server:
-  port: 80
+  port: 11000
 
 spring:
   application:
-    name: api-gateway
+    name: schedualer
   profiles:
     active: dev
   cloud:
