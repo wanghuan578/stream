@@ -1,7 +1,8 @@
 package com.spirit.stream.controller;
 
-import com.spirit.stream.dao.entity.Event;
 
+import com.spirit.common.web.response.entity.ResultEntity;
+import com.spirit.stream.dao.entity.Event;
 import com.spirit.stream.service.TranslateTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,9 @@ public class TranslateTaskController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public void addTask(@RequestBody Event event){
+    public ResultEntity addTask(@RequestBody Event event){
         translateTaskService.addTask(event);
+        return new ResultEntity().succeed();
     }
 
 //    @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)

@@ -6,8 +6,8 @@
         <groupId>com.spirit</groupId>
         <artifactId>translate-service</artifactId>
         <version>1.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.spirit</groupId>
     <artifactId>config-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>

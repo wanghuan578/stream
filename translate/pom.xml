@@ -6,11 +6,12 @@
         <groupId>com.spirit</groupId>
         <artifactId>translate-service</artifactId>
         <version>1.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.spirit</groupId>
     <artifactId>translate</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>translate</name>
     <description>Demo project for Spring Boot</description>
 
@@ -58,6 +59,13 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.spirit</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
