@@ -1,5 +1,6 @@
 package com.spirit.stream.service.impl;
 
+import com.spirit.stream.adaptor.FFmpegAdaptor;
 import com.spirit.stream.dao.entity.Event;
 import com.spirit.stream.dao.entity.TranslateBizInfo;
 import com.spirit.stream.dao.repository.EventRepository;
@@ -20,13 +21,21 @@ public class TranslateTaskServiceImpl implements TranslateTaskService {
     @Resource
     private EventRepository eventRepository;
 
+    @Resource
+    private FFmpegAdaptor ffmpegAdaptor;
+
     public void addTask(Event event) {
+
         eventRepository.save(event);
+
         List<TranslateBizInfo> list = event.getTranslateBizInfoList();
         for (TranslateBizInfo info : list) {
             info.setEvent(event);
             translateRepository.save(info);
+            ffmpegAdaptor.translateCode(info);
         }
+
+
     }
 
     public int runTask() {
