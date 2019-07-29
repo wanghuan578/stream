@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <mysql/mysql.h>
+//#include <mysql/mysql.h>
 #include "mysql_ds.h"
 
 //MYSQL *connection = NULL;
@@ -13,28 +13,31 @@ const char *uid_default = "root";
 const char *pwd_default = "spirit";
 const char *db_default = "translate";
 
+MYSQL *get_fd(MYSQL *mysql, const char *hostname, const char *username, const char *password,
+        const char *dbname);
 
-MYSQL *init_connector(char *ip=NULL, char *uid=NULL, char *pwd=NULL, char *db=NULL)
+
+MYSQL *init_connector(MYSQL *mysql, const char *ip, const char *uid, const char *pwd, const char *db)
 {
-	MYSQL mysql;
 	MYSQL *fd = NULL;
-    mysql_init(&mysql);
-	if (ip == NULL) {
-		fd = get_fd(ip, uid, pwd, db);
+	if (ip != NULL) {
+		fd = get_fd(mysql, ip, uid, pwd, db);
 	}
 	else {
-		fd = get_fd(ip_default, uid_default, pwd_default, db_default);
+		fd = get_fd(mysql, ip_default, uid_default, pwd_default, db_default);
 	}
 	return fd;
 }
 
-static MYSQL *get_fd(const char *hostname, const char *username, const char *password,
+MYSQL *get_fd(MYSQL *mysql, const char *hostname, const char *username, const char *password,
         const char *dbname) {
-    MYSQL *fd = mysql_real_connect(&mysql, hostname, username, password, dbname, 0, 0, 0);
+    //MYSQL mysql;
+    mysql_init(mysql);
+    MYSQL *fd = mysql_real_connect(mysql, hostname, username, password, dbname, 0, 0, 0);
 
     if (fd == NULL)
     {
-        printf("%s\n", mysql_error(&mysql));
+        printf("%s\n", mysql_error(mysql));
         return -1;
     }
 

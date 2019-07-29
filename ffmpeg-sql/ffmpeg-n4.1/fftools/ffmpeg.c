@@ -4901,6 +4901,9 @@ int main(int argc, char **argv)
 	printf("<====================================================\n");
     exec_sql(mysql_fd, "update event set status = 2 where resource_name = 'res-0002'");
 #endif
+    MYSQL mysql;
+    MYSQL *fd = init_connector(&mysql, NULL, NULL, NULL, NULL);
+    exec_sql(fd, "update event set resource_name = '2222222' where resource_id = 'qqwsdedsdfsdcsdrfdsvasdvadfadv'");
     int ret;
     BenchmarkTimeStamps ti;
 
