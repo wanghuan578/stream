@@ -4841,9 +4841,9 @@ static void log_callback_null(void *ptr, int level, const char *fmt, va_list vl)
 
 typedef struct transcode 
 {
-    int resource_id;
-    char resource_name[64];
-    char dest_bit_rate[32];
+    char src_file_path[256];
+    char out_bite_rate[32];
+    char out_file_name[32];
     char src_bit_rate[32];
     int status;
 }transcode_info;
@@ -4873,17 +4873,17 @@ int main(int argc, char **argv)
 	MYSQL_ROW row = mysql_fetch_row(res);
 
 	for (j = 0; j < num_fields; j++) {
-	    if (j == 0) {
-	    	transcode_list[i].resource_id = atoi(row[j]);
+	    if (j == 1) {
+			strcpy(transcode_list[i].src_file_path, row[j]);
 	    }
-	    else if (j == 1) {
-	    	strcpy(transcode_list[i].resource_name, row[j]);
-	    }
-	    else if (j == 2) {
-                strcpy(transcode_list[i].dest_bit_rate, row[j]);
-            } 
 	    else if (j == 3) {
-                strcpy(transcode_list[i].src_bit_rate, row[j]);
+	    	strcpy(transcode_list[i].out_bite_rate, row[j]);
+	    }
+	    else if (j == 4) {
+                strcpy(transcode_list[i].out_file_name, row[j]);
+            } 
+	    else if (j == 7) {
+			transcode_list[i].status = atoi(row[j]);
             }
         }
     }
