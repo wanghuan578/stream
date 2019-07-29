@@ -1,6 +1,7 @@
 package com.spirit.stream.controller;
 
 
+import com.spirit.common.Exception.MainStageException;
 import com.spirit.common.web.response.entity.ResultEntity;
 import com.spirit.stream.dao.entity.Event;
 import com.spirit.stream.service.TranslateTaskService;
@@ -23,8 +24,12 @@ public class TranslateTaskController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResultEntity addTask(@RequestBody Event event){
-        translateTaskService.addTask(event);
-        return new ResultEntity().succeed();
+        try {
+            translateTaskService.addTask(event);
+            return new ResultEntity().succeed();
+        } catch (MainStageException e) {
+            return new ResultEntity().failed(e.getResultType());
+        }
     }
 
 //    @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)

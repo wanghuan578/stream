@@ -13,7 +13,6 @@ public class Event {
     private Long id;
     private String resourceId;
     private String resourceName;
-    private String fileFormat;
     @OneToMany(targetEntity=TranslateBizInfo.class, mappedBy = "event")
     private List<TranslateBizInfo> translateBizInfoList;
 }

@@ -1,6 +1,6 @@
 package com.spirit.common.web.response.entity;
 
-import com.spirit.common.web.response.constant.ResultType;
+import com.spirit.common.constant.ResultType;
 import lombok.Data;
 import java.io.Serializable;
 

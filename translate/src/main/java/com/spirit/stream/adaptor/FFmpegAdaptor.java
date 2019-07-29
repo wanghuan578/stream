@@ -1,33 +1,57 @@
 package com.spirit.stream.adaptor;
 
-
+import com.spirit.common.Exception.MainStageException;
 import com.spirit.stream.dao.entity.TranslateBizInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
+
+import static com.spirit.common.constant.ResultType.PARAMS_DISMATCH;
 
 @Slf4j
 @Service
 public class FFmpegAdaptor {
 
-    public int translateCode(TranslateBizInfo info) {
+    public int translate(TranslateBizInfo info) throws MainStageException {
 
-        Process process = null;
-        int exitValue = 0;
+        String command = StringUtils.join(new String [] {
+                "ffmpeg",
+                "-y",
+                "-i",
+                info.getSrcFilePath(),
+                "-vf",
+                "scale="+info.getOutBiteRate(),
+                info.getOutFileName()
+        }, " ");
+
+        log.info("fork process command ---->: " + command);
+
+        Runtime rt = null;
 
         try {
-            process = Runtime.getRuntime().exec("ffmpeg -i apple_1280x720.MP4 -vf scale=640:480 1.mp4 -hide_banner");
-            exitValue = process.waitFor();
+            rt = Runtime.getRuntime();
+            //Process p = run.exec(new String[]{ "cmd", "/c", command});
+            Process proc = rt.exec(command);
+            proc.getOutputStream().close();
+            proc.getInputStream().close();
+            proc.getErrorStream().close();
+
+            int exitValue = proc.waitFor();
+
             if (0 != exitValue) {
-                log.error("call shell failed. error code is :" + exitValue);
+                log.error("fork ffmpeg failed. error code: " + exitValue);
+            }
+            else {
+                log.info("ffmpeg translate succeed.");
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error(e.getLocalizedMessage(), e);
+            throw new MainStageException(PARAMS_DISMATCH);
+        } catch (InterruptedException e) {
+            log.error(e.getLocalizedMessage(), e);
+            throw new MainStageException(PARAMS_DISMATCH);
         }
 
         return 0;

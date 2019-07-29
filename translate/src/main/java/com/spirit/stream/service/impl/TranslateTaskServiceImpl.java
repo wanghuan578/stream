@@ -1,5 +1,6 @@
 package com.spirit.stream.service.impl;
 
+import com.spirit.common.Exception.MainStageException;
 import com.spirit.stream.adaptor.FFmpegAdaptor;
 import com.spirit.stream.dao.entity.Event;
 import com.spirit.stream.dao.entity.TranslateBizInfo;
@@ -24,7 +25,7 @@ public class TranslateTaskServiceImpl implements TranslateTaskService {
     @Resource
     private FFmpegAdaptor ffmpegAdaptor;
 
-    public void addTask(Event event) {
+    public void addTask(Event event) throws MainStageException {
 
         eventRepository.save(event);
 
@@ -32,7 +33,7 @@ public class TranslateTaskServiceImpl implements TranslateTaskService {
         for (TranslateBizInfo info : list) {
             info.setEvent(event);
             translateRepository.save(info);
-            ffmpegAdaptor.translateCode(info);
+            ffmpegAdaptor.translate(info);
         }
 
 

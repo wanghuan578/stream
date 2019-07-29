@@ -1,4 +1,4 @@
-package com.spirit.common.web.response.constant;
+package com.spirit.common.constant;
 
 import com.spirit.common.web.response.utils.ErrorTuple;
 
