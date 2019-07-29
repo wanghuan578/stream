@@ -5,15 +5,30 @@
 #include <mysql/mysql.h>
 #include "mysql_ds.h"
 
-MYSQL *connection = NULL;
-MYSQL mysql;
+//MYSQL *connection = NULL;
+//MYSQL mysql;
 
-void init_db()
+const char *ip_default = "192.168.152.38";
+const char *uid_default = "root";
+const char *pwd_default = "spirit";
+const char *db_default = "translate";
+
+
+MYSQL *init_connector(char *ip=NULL, char *uid=NULL, char *pwd=NULL, char *db=NULL)
 {
+	MYSQL mysql;
+	MYSQL *fd = NULL;
     mysql_init(&mysql);
+	if (ip == NULL) {
+		fd = get_fd(ip, uid, pwd, db);
+	}
+	else {
+		fd = get_fd(ip_default, uid_default, pwd_default, db_default);
+	}
+	return fd;
 }
 
-MYSQL *get_fd(const char *hostname, const char *username, const char *password,
+static MYSQL *get_fd(const char *hostname, const char *username, const char *password,
         const char *dbname) {
     MYSQL *fd = mysql_real_connect(&mysql, hostname, username, password, dbname, 0, 0, 0);
 
