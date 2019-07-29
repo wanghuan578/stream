@@ -4852,17 +4852,17 @@ typedef struct transcode
 int main(int argc, char **argv)
 {
     int i, j = 0;
-
+#if 0
     init_db();
 
-    MYSQL *mysql_fd = get_fd("192.168.152.32", "root", "spirit", "ffmpeg");
+    MYSQL *mysql_fd = get_fd("192.168.152.38", "root", "spirit", "translate");
     if (mysql_fd == NULL) {
 	printf("db connect failed\n");
         return;
     }
 
     char szTmp[512] = {0};
-    strcpy(szTmp, "select * from transcode");
+    strcpy(szTmp, "select * from translate_biz_info");
     mysql_real_query(mysql_fd, szTmp, strlen(szTmp));
     MYSQL_RES *res = mysql_store_result(mysql_fd);
     int len = mysql_affected_rows(mysql_fd);
@@ -4892,14 +4892,15 @@ int main(int argc, char **argv)
 
     for (i = 0; i < len; i++) {
 
-	printf("id: %d, name: %s, dest: %s, src: %s\n", 
-		transcode_list[i].resource_id,
-		transcode_list[i].resource_name,
-		transcode_list[i].dest_bit_rate,
-		transcode_list[i].src_bit_rate);
+	printf("src_file_path: %s, out_bite_rate: %s, out_file_name: %s, status: %d\n", 
+		transcode_list[i].src_file_path,
+		transcode_list[i].out_bite_rate,
+		transcode_list[i].out_file_name,
+		transcode_list[i].status);
     }
 	printf("<====================================================\n");
-    exec_sql(mysql_fd, "update transcode set status = 2 where resource_name = 'res-0002'");
+    exec_sql(mysql_fd, "update event set status = 2 where resource_name = 'res-0002'");
+#endif
     int ret;
     BenchmarkTimeStamps ti;
 
