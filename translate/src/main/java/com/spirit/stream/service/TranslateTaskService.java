@@ -4,7 +4,6 @@ import com.spirit.common.Exception.MainStageException;
 import com.spirit.stream.dao.entity.Event;
 
 
-
 public interface TranslateTaskService {
     void addTask(Event event) throws MainStageException;
     int runTask();
