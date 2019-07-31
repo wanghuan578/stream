@@ -1,10 +1,10 @@
-
+![image](./demo_images/cloud.jpg)
 
 ## Translate Code   基于FFMPEG的转码集群
 
 ### 一键安装
 
-![image](./demo_images/cloud.jpg)
+
 #### SPRING cloud框架
 
 - mvn clean install
@@ -13,6 +13,7 @@
 
 - ./configure
 - make -j8 && make install
+
 
 ### 采用框架及功能
 
@@ -23,6 +24,7 @@
 - schedualer调度系统
 - translate转码服务
 - 转码能力层采用ffmpeg
+
 
 ### 特性
 
@@ -53,10 +55,12 @@ http://localhost:9000/add POST
 
 ### 相关资源
 
+
 - [配置文件](https://github.com/wanghuan578/spring-cloud-config-repos)(spring cloud config)。
 
 
 ### 作者和贡献者信息
+
 
 - spirit(57810140@qq.com)
 
