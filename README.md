@@ -7,8 +7,8 @@
 mvn clean install
 
 #### FFMPEG
-./configure
-make && make install
+- ./configure
+- make && make install
 
 ### 采用框架及功能
 - common包含共同的bean、常量、异常处理类
