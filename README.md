@@ -3,7 +3,7 @@
 
 ### 一键安装
 
-#### 框架
+#### SPRING cloud框架
 - mvn clean install
 
 #### FFMPEG
@@ -30,7 +30,7 @@
 
 ### Q&A
 
-### 注意事项:
+
 
 ### 作者和贡献者信息：
 
