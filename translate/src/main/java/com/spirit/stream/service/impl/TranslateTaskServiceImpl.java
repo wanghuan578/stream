@@ -10,8 +10,10 @@ import com.spirit.stream.dao.repository.EventRepository;
 import com.spirit.stream.dao.repository.TranslateRepository;
 import com.spirit.stream.mq.upload.UploadSender;
 import com.spirit.stream.service.TranslateTaskService;
+import com.spirit.stream.service.UploadVideoServcice;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -30,29 +32,43 @@ public class TranslateTaskServiceImpl implements TranslateTaskService {
     @Resource
     private FFmpegAdaptor ffmpegAdaptor;
 
-    @Resource
-    private UploadSender uploadSender;
+//    @Resource
+//    private UploadSender uploadSender;
 
-    public void addTask(Event event) throws MainStageException {
+    @Resource
+    private UploadVideoServcice uploadService;
+
+    public void addTask(Event event)  {
 
         eventRepository.save(event);
 
-        List<TranslateBizInfo> list = event.getTranslateBizInfoList();
-        for (TranslateBizInfo info : list) {
+        for (TranslateBizInfo info : event.getTranslateBizInfoList()) {
             info.setEvent(event);
+            info.setStatus(1);
             translateRepository.save(info);
-            ffmpegAdaptor.translate(info);
         }
-        com.spirit.common.entity.Event ev = new com.spirit.common.entity.Event();
-        BeanUtils.copyProperties(event, ev, new String[] {"translateBizInfoList"});
-        List<TranslateInfo> l = new ArrayList<TranslateInfo>();
-        for(TranslateBizInfo translate : event.getTranslateBizInfoList()) {
-            TranslateInfo t = new TranslateInfo();
-            BeanUtils.copyProperties(translate, t);
-            l.add(t);
+
+        for (TranslateBizInfo info : event.getTranslateBizInfoList()) {
+            try {
+                ffmpegAdaptor.translate(info);
+                info.setStatus(2);
+                translateRepository.save(info);
+            }
+            catch (MainStageException e) {
+                log.error(e.getText());
+                info.setStatus(3);
+                translateRepository.save(info);
+            }
+
+            try {
+                uploadService.upload(info.getTitle(), info.getOutFileName(), event.getResourceId(), info);
+            }
+            catch (MainStageException e) {
+                log.error(e.getText());
+                info.setStatus(4);
+                translateRepository.save(info);
+            }
         }
-        ev.setTranslateBizInfoList(l);
-        uploadSender.send(JSON.toJSONString(ev, true));
     }
 
     public int runTask() {

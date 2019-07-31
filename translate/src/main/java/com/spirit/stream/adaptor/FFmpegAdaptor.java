@@ -1,6 +1,7 @@
 package com.spirit.stream.adaptor;
 
 import com.spirit.common.Exception.MainStageException;
+import com.spirit.common.constant.ResultType;
 import com.spirit.stream.dao.entity.TranslateBizInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -30,7 +31,6 @@ public class FFmpegAdaptor {
 
         try {
             rt = Runtime.getRuntime();
-            //Process p = run.exec(new String[]{ "cmd", "/c", command});
             Process proc = rt.exec(command);
             proc.getOutputStream().close();
             proc.getInputStream().close();
@@ -40,6 +40,7 @@ public class FFmpegAdaptor {
 
             if (0 != exitValue) {
                 log.error("fork ffmpeg failed. error code: " + exitValue);
+                throw new MainStageException("1000", String.valueOf(exitValue));
             }
             else {
                 log.info("ffmpeg translate succeed.");

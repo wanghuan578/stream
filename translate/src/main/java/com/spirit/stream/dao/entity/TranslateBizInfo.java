@@ -11,6 +11,7 @@ public class TranslateBizInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
     private String srcFilePath;
     private String srcFileName;
     private String outBiteRate;
