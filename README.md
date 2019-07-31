@@ -1,16 +1,20 @@
+![image](./demo_images/demo1.png)
 
 ## Translate Code   基于FFMPEG的转码集群
 
 ### 一键安装
 
 #### SPRING cloud框架
+
 - mvn clean install
 
 #### FFMPEG
+
 - ./configure
-- make && make install
+- make -j8 && make install
 
 ### 采用框架及功能
+
 - common包含共同的bean、常量、异常处理类
 - api-server网关
 - spring cloud config
@@ -28,8 +32,27 @@
 - 当流量受限或者网络超时导致转码故障，schedualer会定期检测未完成任务补偿任务。
 
 
-### Q&A
+### 测试样例
 
+```
+http://localhost:9000/add
+
+{
+	"resourceId":"qqwsdedsdfsdcsdrfdsvasdvadfadv",
+	"resourceName":"天下有情人",
+	"fileFormat":"mp4",
+	"translateBizInfoList":[
+		{"srcFilePath":"d:/apple.mp4","targetBiteRate":"640:480","targetFileName":"apple001.mp4"},
+		{"srcFilePath":"d:/apple.mp4","targetBiteRate":"720:640","targetFileName":"apple002.mp4"},
+		{"srcFilePath":"d:/apple.mp4","targetBiteRate":"1280:720","targetFileName":"apple003.mp4"},
+		{"srcFilePath":"d:/apple.mp4","targetBiteRate":"1440:1080","targetFileName":"apple004.mp4"}
+		]
+}
+```
+
+#### 相关资源
+
+- [配置文件](https://github.com/wanghuan578/spring-cloud-config-repos)(spring cloud config)。
 
 
 ### 作者和贡献者信息：

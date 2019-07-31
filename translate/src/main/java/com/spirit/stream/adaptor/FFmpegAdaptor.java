@@ -1,7 +1,6 @@
 package com.spirit.stream.adaptor;
 
 import com.spirit.common.Exception.MainStageException;
-import com.spirit.common.constant.ResultType;
 import com.spirit.stream.dao.entity.TranslateBizInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
