@@ -1,7 +1,6 @@
 package com.spirit.stream.mq.upload;
 
 import com.spirit.common.constant.RabbitMQ;
-import com.spirit.common.entity.Event;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

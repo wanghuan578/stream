@@ -21,8 +21,8 @@ public class FFmpegAdaptor {
                 "-i",
                 info.getSrcFilePath(),
                 "-vf",
-                "scale="+info.getOutBiteRate(),
-                info.getOutFileName()
+                "scale="+info.getTargetBiteRate(),
+                info.getTargetFilePath()
         }, " ");
 
         log.info("fork process command ---->: " + command);

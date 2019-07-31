@@ -14,9 +14,9 @@ public class TranslateBizInfo implements Serializable {
     private String title;
     private String srcFilePath;
     private String srcFileName;
-    private String outBiteRate;
-    private String outFileName;
-    private String uploadFilePath;
+    private String targetBiteRate;
+    private String targetFileName;
+    private String targetFilePath;
     @Column(nullable = false, columnDefinition = "TINYINT", length = 1)
     private boolean isProportion;
     @Column(nullable = false, columnDefinition = "TINYINT", length = 2)
