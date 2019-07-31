@@ -3,16 +3,21 @@
 
 ### 一键安装
 
+#### 框架
 mvn clean install
 
-###### 采用框架及功能
-common包含共同的bean、常量、异常处理类
-api-server网关
-spring cloud config
-eureka服务治理
-schedualer调度系统
-translate转码服务
-转码能力层采用ffmpeg
+#### FFMPEG
+./configure
+make && make install
+
+### 采用框架及功能
+- common包含共同的bean、常量、异常处理类
+- api-server网关
+- spring cloud config
+- eureka服务治理
+- schedualer调度系统
+- translate转码服务
+- 转码能力层采用ffmpeg
 
 ### 特性
 
@@ -23,28 +28,11 @@ translate转码服务
 - 当流量受限或者网络超时导致转码故障，schedualer会定期检测未完成任务补偿任务。
 
 
-#### Q&A
-
-
+### Q&A
 
 ### 注意事项:
 
-
-
-
-
-
-
-
-```
-
-
-
-
-
-
-
 ### 作者和贡献者信息：
 
-- Jack Yu 作者(jack-yu-business@foxmail.com / https://github.com/szad670401)
+- spirit(57810140@qq.com)
 
