@@ -4,7 +4,7 @@
 ### 一键安装
 
 #### 框架
-mvn clean install
+- mvn clean install
 
 #### FFMPEG
 - ./configure
