@@ -1,9 +1,10 @@
-![image](./demo_images/demo1.png)
+
 
 ## Translate Code   基于FFMPEG的转码集群
 
 ### 一键安装
 
+![image](./demo_images/cloud.jpg)
 #### SPRING cloud框架
 
 - mvn clean install
@@ -35,7 +36,7 @@
 ### 测试样例
 
 ```
-http://localhost:9000/add
+http://localhost:9000/add POST
 
 {
 	"resourceId":"qqwsdedsdfsdcsdrfdsvasdvadfadv",
@@ -50,12 +51,12 @@ http://localhost:9000/add
 }
 ```
 
-#### 相关资源
+### 相关资源
 
 - [配置文件](https://github.com/wanghuan578/spring-cloud-config-repos)(spring cloud config)。
 
 
-### 作者和贡献者信息：
+### 作者和贡献者信息
 
 - spirit(57810140@qq.com)
 
